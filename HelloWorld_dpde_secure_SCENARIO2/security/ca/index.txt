@@ -1,0 +1,2 @@
+V	490308143838Z		01	unknown	/C=US/ST=CA/O=My Organization/CN=A publisher/emailAddress=publisher@my-organization.com
+V	490308143838Z		02	unknown	/C=US/ST=CA/O=My Organization/CN=A subscriber/emailAddress=subscriber@my-organization.com

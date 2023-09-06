@@ -1,0 +1,182 @@
+MIME-Version: 1.0
+Content-Type: multipart/signed; protocol="application/pkcs7-signature"; micalg="sha-256"; boundary="----B04B9E2F76BE38F22FDF28A8F6AB352E"
+
+This is an S/MIME signed message
+
+------B04B9E2F76BE38F22FDF28A8F6AB352E
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+     xsi:noNamespaceSchemaLocation="http://www.omg.org/spec/DDS-SECURITY/20170901/omg_shared_ca_governance.xsd">
+    <!--
+    A governance file is composed of 1 or more domain_rule elements, inside a
+    parent domain_access_rules element.
+    -->
+    <domain_access_rules>
+        <!--
+        A domain_rule defines which security protections should be enforced on
+        a set of DDS domains and their contained topics.
+        -->
+        <domain_rule>
+            <!--
+            The domains element specifies the range of domains affected by
+            the parent domain_rule.
+            -->
+            <domains>
+                <!-- 
+                Domains can be specified individually with the id element 
+                -->
+                <id>0</id>
+                <!--
+                A range of domains can be specified with the id_range element.
+                -->
+                <id_range>
+                    <min>1</min>
+                    <max>10</max>
+                </id_range>
+            </domains>
+            <!-- 
+            allow_unauthenticated_participants can be set to "true" to enable
+            communication on "unsecure topics" (i.e. topics with all 
+            protections disabled and all protection kinds set to NONE) even
+            when a participant fails to authenticate (or it doesn't support
+            DDS Security at all).
+            
+            If set to "false", any participant who fails to complete the
+            authentication handshake will be ignored.
+            
+            When this property is enabled, rtps_protection_kind must be set to
+            NONE, or it would be impossible for unauthenticated participants to
+            properly decode received RTPS messages.
+            -->
+            <allow_unauthenticated_participants>false</allow_unauthenticated_participants>
+            <!--
+            enable_join_access_control can be set to "false" to disable access
+            control checks during creation of local participants, and discovery 
+            of remote ones. When access control is disabled, the secure 
+            discovery endpoints will also be discoverable by remote participants
+            regardless of their permissions.
+            -->
+            <enable_join_access_control>true</enable_join_access_control>
+            <!--
+            discovery_protection_kind controls the type of protection to be 
+            applied on data exchanged by the secure discovery endpoints.
+            -->
+            <discovery_protection_kind>ENCRYPT</discovery_protection_kind>
+            <!--
+            liveliness_protection_kind controls the type of protection to be 
+            applied on messages exchanged on the ParticipantMessage 
+            inter-participant channel to maintain liveliness between 
+            participants and endpoints.
+            
+            Since RTI Connext DDS Micro does not support this inter-participant
+            channel, this setting is currently ignored, but the XML element
+            must be included to maintain conformance with the XSD definition.
+            -->
+            <liveliness_protection_kind>NONE</liveliness_protection_kind>
+            <!--
+            rtps_protection_kind controls the type of protection to be applied
+            on RTPS messages produced by the participant.
+            -->
+            <rtps_protection_kind>SIGN</rtps_protection_kind>
+            <!--
+            The topic_access_rules section must contain 1 or more topic_rule
+            elements to define security properties of each topic in the domain.
+            -->
+            <topic_access_rules>
+                <!--
+                A topic_rule defines a set of security properties for one
+                or more topics identified by the topic_expression.
+                -->
+                <topic_rule>
+                    <!--
+                    A topic_expression can use the '*' character to perform
+                    simple matching on the suffix part of the topic name 
+                    -->
+                    <topic_expression>Example *</topic_expression>
+                    <!--
+                    If enable_discovery_protection is "true", the topic will 
+                    be announced on the secure discovery endpoints, and 
+                    matchable only by authenticated participants.
+                    -->
+                    <enable_discovery_protection>true</enable_discovery_protection>
+                    <!--
+                    RTI Connext DDS Micro does not support endpoint-level
+                    liveliness assertion, which can be made secure using this
+                    property.
+                    
+                    This setting is currently ignored, but the XML element must
+                    be included to maintain conformance with the XSD.
+                    -->
+                    <enable_liveliness_protection>false</enable_liveliness_protection>
+                    <!--
+                    If enable_read_access_control is set to "false", the 
+                    middleware will not perform access control checks when
+                    creating and/or discovering DataReaders on this topic
+                    -->
+                    <enable_read_access_control>true</enable_read_access_control>
+                    <!--
+                    If enable_write_access_control is set to "false", the 
+                    middleware will not perform access control checks when
+                    creating and/or discovering DataWriters on this topic
+                    -->
+                    <enable_write_access_control>true</enable_write_access_control>
+                    <!--
+                    metadata_protection_kind controls the type of protection to
+                    be applied on RTPS Submessages exchanged by endpoints for
+                    this topic.
+                    -->
+                    <metadata_protection_kind>SIGN</metadata_protection_kind>
+                    <!--
+                    metadata_protection_kind controls the type of protection to
+                    be applied on data samples exchanged by endpoints for
+                    this topic.
+                    -->
+                    <data_protection_kind>NONE</data_protection_kind>
+                </topic_rule>
+            </topic_access_rules>
+        </domain_rule>
+    </domain_access_rules>
+</dds>
+------B04B9E2F76BE38F22FDF28A8F6AB352E
+Content-Type: application/pkcs7-signature; name="smime.p7s"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="smime.p7s"
+
+MIIGiQYJKoZIhvcNAQcCoIIGejCCBnYCAQExDTALBglghkgBZQMEAgEwCwYJKoZI
+hvcNAQcBoIIDnTCCA5kwggKBAhRwOlxeq/yb1SWlw5IJh1+YFfbI9zANBgkqhkiG
+9w0BAQsFADCBiDELMAkGA1UEBhMCVVMxCzAJBgNVBAgMAkNBMRIwEAYDVQQHDAlT
+dW5ueXZhbGUxGDAWBgNVBAoMD015IE9yZ2FuaXphdGlvbjESMBAGA1UEAwwJTXkg
+T3JnIENBMSowKAYJKoZIhvcNAQkBFhtleGFtcGxlQG15LW9yZ2FuaXphdGlvbi5j
+b20wHhcNMjMwNjE2MTU0NzE4WhcNMzMwNjEzMTU0NzE4WjCBiDELMAkGA1UEBhMC
+VVMxCzAJBgNVBAgMAkNBMRIwEAYDVQQHDAlTdW5ueXZhbGUxGDAWBgNVBAoMD015
+IE9yZ2FuaXphdGlvbjESMBAGA1UEAwwJTXkgT3JnIENBMSowKAYJKoZIhvcNAQkB
+FhtleGFtcGxlQG15LW9yZ2FuaXphdGlvbi5jb20wggEiMA0GCSqGSIb3DQEBAQUA
+A4IBDwAwggEKAoIBAQC4kGI7RcLqpSvwmHOK1a46O0hVmT99EjXv5+Z1tA5Gs/OI
+0VBbgK81wrJw3Iibig2aO/Y+FLlqOuyFpmYkvTSQ25gQR1L7K1FqQ5+U8R24lfDn
+EdwYy7ljEuYOvGjOq9Jb7G9Hz442cS8d1y/maLA2SHev5fCMuAzBASPmy8lfLfHU
+6wiVI/d1Mow6uchdUiB8Dg7VErZpeKTmczHV3+Qdu1KT0shtf3HCvChQneO8cAy0
+SfxRE49o/3WTfhanraYXfSTIN4DPKt97abYbQhLSv0bAoc0B1s5DWR3WF9OYvHUW
+ZUG2ky2lC2G5zm26nTupUPv6GkTSoFY1GjZdq2pZAgMBAAEwDQYJKoZIhvcNAQEL
+BQADggEBAA14goB8glUrxqG+BJQgBTU5SEY2nezeVWREq8dq25JnRI7BcpEBT3xP
+V7rQtKBuOXUaHabeC+aVkQGrtqc5mDhaKlI++8zF/bDWF2S/0IkVe3vYUazx7LYn
+xKIv+/KRmhMaYmXDTlXwnUft8Hhuu2zvzwForP3jmn2rex+yFGK4pniWmK43aApq
+EcXUo7oM3ugcAuKi7KhaSzJ0/clLNffnYN8HLRFT0P3o5GTWmEPlEwhieAT0Oc7J
+Ii77RCdQCn0iyVkEIBryXoI3I40vUWpe+4RCB4rzosCXUO80QJFDUrxpnOft/BM6
+y8G3shqIvmzR3pl7qaTYgP8ofaBhPnIxggKyMIICrgIBATCBoTCBiDELMAkGA1UE
+BhMCVVMxCzAJBgNVBAgMAkNBMRIwEAYDVQQHDAlTdW5ueXZhbGUxGDAWBgNVBAoM
+D015IE9yZ2FuaXphdGlvbjESMBAGA1UEAwwJTXkgT3JnIENBMSowKAYJKoZIhvcN
+AQkBFhtleGFtcGxlQG15LW9yZ2FuaXphdGlvbi5jb20CFHA6XF6r/JvVJaXDkgmH
+X5gV9sj3MAsGCWCGSAFlAwQCAaCB5DAYBgkqhkiG9w0BCQMxCwYJKoZIhvcNAQcB
+MBwGCSqGSIb3DQEJBTEPFw0yMzA2MTYxNTQ3MThaMC8GCSqGSIb3DQEJBDEiBCB8
+2faAEKlDm/kCAb3z72M99PqUIwvHuVuEpjsN+8dPgzB5BgkqhkiG9w0BCQ8xbDBq
+MAsGCWCGSAFlAwQBKjALBglghkgBZQMEARYwCwYJYIZIAWUDBAECMAoGCCqGSIb3
+DQMHMA4GCCqGSIb3DQMCAgIAgDANBggqhkiG9w0DAgIBQDAHBgUrDgMCBzANBggq
+hkiG9w0DAgIBKDANBgkqhkiG9w0BAQEFAASCAQCMRKHmD6Sl4uITAaMqKFFW5p77
+UOpdxxCo/UzhgT+calT1953z7DUPoJ3axR0yOck+1wWUcTZ9OBiL/VfSkiyQvqdi
+QOj1q/LsOY9ljz1mn8IHQ3SPU4dxX9u29uNLLPttFZxJLuZC9FiItAEi/sc1Bhui
+xP9JWDnZBy3wVQzTySksL+6Fp78zia1wuKOFWBUMw5gUeeGkqF7xanUP9a0ZvCFW
+tWilw0dMlN9kQ7mvvcmJvmke/RQvxHx5td064IbPmHyRNh4VUCNYfMoMBftA7iG7
+m459F67WKXQgE7FGNgtUPjfE6fQCh1TVpHth7DMA4+FmbuyGoWNCUBFWtOqA
+
+------B04B9E2F76BE38F22FDF28A8F6AB352E--
+
