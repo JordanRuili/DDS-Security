@@ -67,6 +67,11 @@ It seems that the system scheduler gives ressources reciprocately to both of the
 However, as the computer I am using with 4 CPU cores, I could only launch 3 subscribers apart from the publisher. To launch additional subscribers I used at least twice a same core, which resulted in the first observation made.
 
 
+Script results :
+The bash scripts scenario1.sh and scenario2.sh can be launched from the common repository root to test the different outputs of the workplan (participants are launched from different cores).
+
+
+
 
 
 
