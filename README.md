@@ -68,7 +68,14 @@ However, as the computer I am using with 4 CPU cores, I could only launch 3 subs
 
 
 Script results :
+
 The bash scripts scenario1.sh and scenario2.sh can be launched from the common repository root to test the different outputs of the workplan (participants are launched from different cores).
+
+_____________________________
+Multiple attacks:
+
+I provided a bash script called attacks.sh which launches 10 subscribers (with security plugin enabled randomly). This script simulates an attack scenario where multiple subscribers try to attack a domain. I could not create the subscribers tabs in the same window as the publisher but it should still work. With multiple subscribers, the following errors are printed in the terminals : ERROR: ModuleID=2 Errcode=12 X=0 E=1 T=1, ERROR: ModuleID=7 Errcode=109 X=0 E=1 T=1, ERROR: ModuleID=11 Errcode=36 X=0 E=1 T=1, which means that the database's table record is full and that the participant failed to assert and discover completely a remote participant. Indeed, among the 10 subscribers launched, not all of them could be discovered by the publisher (and the other subscribers) and the number discovered varies.
+
 
 
 
